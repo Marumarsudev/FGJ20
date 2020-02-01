@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class BaseEvent : MonoBehaviour
 {
-    public virtual void CallEvent()
+
+    public virtual void CallEvent(GameObject interactor = null)
     {
-        Debug.Log("This is an event.");
+        if(interactor != null)
+            Debug.Log("This event was triggered by" + interactor.name);
+        else
+            Debug.Log("This is the default event.");
     }
 }
