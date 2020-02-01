@@ -45,7 +45,7 @@ public class ObjectSpawner : MonoBehaviour
                 Debug.Log("Oh no we hit something");
             }
         }
-
+ 
         for(int i = 0; i < environmentcount; i++)
         {
             Vector3 spawnpos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius)) + transform.position;
@@ -54,7 +54,11 @@ public class ObjectSpawner : MonoBehaviour
             if(Physics.OverlapSphere(spawnpos, 3f, mask).Length == 0)
             {
             GameObject temp;
-            temp = Instantiate(environment[Random.Range(0, environment.Count)], spawnpos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), parent);
+            int rand = Random.Range(0, environment.Count);
+            //Quaternion.Euler(new Vector3(environment[rand].transform.localRotation.x, Random.Range(0, 360), environment[rand].transform.localRotation.z))
+            temp = Instantiate(environment[rand], spawnpos, environment[rand].transform.rotation, parent);
+
+            temp.transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0) + temp.transform.rotation.eulerAngles);
 
             environment.Add(temp);
             }

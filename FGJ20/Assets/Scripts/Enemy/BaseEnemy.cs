@@ -81,20 +81,22 @@ public class BaseEnemy : MonoBehaviour
         }
 
         Physics.Raycast(transform.position, player.transform.position - transform.position, out RaycastHit hit, int.MaxValue);
-
-        if(Vector3.Distance(transform.position, player.transform.position) <= visionRange && hit.collider.tag == "Player")
-        {
-            Vector3 targetDir = player.transform.position - transform.position;
-            if(Vector3.Angle(targetDir, transform.forward) <= fieldOfView || Vector3.Distance(transform.position, player.transform.position) <= 10f)
+        if(hit.collider != null)
             {
-                meshAgent.SetDestination(player.transform.position);
-                seeingPlayer = true;
-                moving = false;
+            if(Vector3.Distance(transform.position, player.transform.position) <= visionRange && hit.collider.tag == "Player")
+            {
+                Vector3 targetDir = player.transform.position - transform.position;
+                if(Vector3.Angle(targetDir, transform.forward) <= fieldOfView || Vector3.Distance(transform.position, player.transform.position) <= 10f)
+                {
+                    meshAgent.SetDestination(player.transform.position);
+                    seeingPlayer = true;
+                    moving = false;
+                }
             }
-        }
-        else if(seeingPlayer && Vector3.Distance(transform.position, player.transform.position) >= visionRange * 2f || hit.collider.tag != "Player")
-        {
-            seeingPlayer = false;
+            else if(seeingPlayer && Vector3.Distance(transform.position, player.transform.position) >= visionRange * 2f || hit.collider.tag != "Player")
+            {
+                seeingPlayer = false;
+            }
         }
     }
 }

@@ -109,7 +109,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 6f))
             {
-                if(hit.collider.GetComponent<WorldItem>())
+                if(hit.collider.GetComponent<BaseEnemy>())
+                {
+                    hit.collider.GetComponent<HealthComponent>().TakeHealth(damage / 2);
+                }
+                else if(hit.collider.GetComponent<WorldItem>())
                 {
                     hit.collider.GetComponent<WorldItem>().Interact(gameObject);
                 }
