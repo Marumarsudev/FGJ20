@@ -26,11 +26,11 @@ public class AddItemToPlayerEvent : BaseEvent
         {
             if(interactor.GetComponent<PlayerInventory>())
             {
-                int amount = Random.Range(amountMin, amountMax);
+                int amount = Random.Range(amountMin, amountMax + 1);
 
                 if(hp != null)
                 {
-                    if(hp.CurrentHealth < amount)
+                    if(hp.CurrentHealth <= amount)
                         amount = (int)hp.CurrentHealth;
                 }
 

@@ -24,8 +24,33 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    public bool CheckItem(InventoryItem item, int amount)
+    {
+        if(inventory.ContainsKey(item))
+        {
+            if(inventory[item] >= amount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void AddItem(InventoryItem item, int amount)
     {
+        if(item == null)
+        {
+            Debug.Log("No item provided !"); 
+            return;
+        }
+
         if(inventory.ContainsKey(item))
         {
             inventory[item] += amount;

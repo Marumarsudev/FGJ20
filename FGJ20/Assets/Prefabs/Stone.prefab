@@ -11,16 +11,18 @@ GameObject:
   - component: {fileID: 4060976082363728528}
   - component: {fileID: 4060976082363728531}
   - component: {fileID: 4060976082363728530}
+  - component: {fileID: 674597250521014891}
   - component: {fileID: 4060976082363728532}
   - component: {fileID: 4060976082363728529}
   - component: {fileID: 4060976082363728750}
   - component: {fileID: 4792140504284940181}
+  - component: {fileID: 6969691573374596823}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4060976082363728528
 Transform:
@@ -83,6 +85,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &674597250521014891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060976082363728535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1413b3486285b544186279dd5bfabf5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoText: Stone
 --- !u!114 &4060976082363728532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +155,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8099949705845188443, guid: 53aa7690963e47249b884ba23c6ecbde, type: 3}
+--- !u!208 &6969691573374596823
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060976082363728535}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.44400004, y: 0.316, z: 0.44400004}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.074, y: -0.024, z: 0.047000002}
+  m_TimeToStationary: 0.5
