@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -8,12 +9,26 @@ public class PlayerInventory : MonoBehaviour
 
     private Dictionary<InventoryItem, int> inventory = new Dictionary<InventoryItem, int>();
 
+    public TextMeshProUGUI inventoryText;
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
             DebugPrintItems();
         }
+    }
+
+    private void UpdateInventoryUI()
+    {
+        string itemlist = "Inventory:";
+
+        foreach (KeyValuePair<InventoryItem, int> keyValuePair in inventory)
+        {
+            itemlist += "\n" + keyValuePair.Key.name + " : " + keyValuePair.Value.ToString();
+        }
+
+        inventoryText.text = itemlist;
     }
 
     public void DebugPrintItems()
@@ -65,6 +80,8 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("Inventory is full!");
         }
+
+        UpdateInventoryUI();
     }
 
     public void RemoveItem(InventoryItem item, int amount)
@@ -85,5 +102,6 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("No such item in inventory");
         }
+        UpdateInventoryUI();
     }
 }

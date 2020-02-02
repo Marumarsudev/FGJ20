@@ -11,10 +11,8 @@ GameObject:
   - component: {fileID: 991842722492271720}
   - component: {fileID: 991842722492271723}
   - component: {fileID: 991842722492271722}
-  - component: {fileID: -4807379908682807129}
-  - component: {fileID: 991842722492271724}
-  - component: {fileID: 991842722492271721}
   - component: {fileID: 991842722492272022}
+  - component: {fileID: 6065721495947101794}
   - component: {fileID: -446749385035977212}
   - component: {fileID: 3037235871551065864}
   m_Layer: 0
@@ -85,48 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &-4807379908682807129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991842722492271727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1413b3486285b544186279dd5bfabf5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoText: Tree
---- !u!114 &991842722492271724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991842722492271727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f20cc03556633b54aa51f83d17114c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryItem: {fileID: 11400000, guid: f3043ce8e7fdeef4fa4bc6e2521937ac, type: 2}
-  InteractEvent:
-  - {fileID: 991842722492271721}
---- !u!114 &991842722492271721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991842722492271727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb94000ea7307c4192cb7bc02dad782, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amountMin: 1
-  amountMax: 3
 --- !u!114 &991842722492272022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +95,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f310346feb7d741aa70a87ad3f6f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 75
   destroyOnDeath: 1
+  deathEvents:
+  - {fileID: 6065721495947101794}
+--- !u!114 &6065721495947101794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991842722492271727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40a17f08fafb9745af36d8e749aacc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go: {fileID: 1499653067800159253, guid: 41448ec4b128a364eadc871aaec6598a, type: 3}
+  spawnOffset: {x: 0, y: 2, z: 0}
+  spawnpos: {x: 0, y: 0, z: 0}
+  spawnrot: {x: 0, y: 0, z: 0}
+  useTransformPos: 1
+  usePrefabRotation: 0
+  spawnAmount: 3
 --- !u!64 &-446749385035977212
 MeshCollider:
   m_ObjectHideFlags: 0

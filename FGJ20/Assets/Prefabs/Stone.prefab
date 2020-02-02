@@ -11,10 +11,6 @@ GameObject:
   - component: {fileID: 4060976082363728528}
   - component: {fileID: 4060976082363728531}
   - component: {fileID: 4060976082363728530}
-  - component: {fileID: 674597250521014891}
-  - component: {fileID: 4060976082363728532}
-  - component: {fileID: 4060976082363728529}
-  - component: {fileID: 4060976082363728750}
   - component: {fileID: 4792140504284940181}
   - component: {fileID: 6969691573374596823}
   m_Layer: 0
@@ -85,62 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &674597250521014891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4060976082363728535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1413b3486285b544186279dd5bfabf5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoText: Stone
---- !u!114 &4060976082363728532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4060976082363728535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f20cc03556633b54aa51f83d17114c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryItem: {fileID: 11400000, guid: 2254a8ce199c03847a6ef0bf0af687c3, type: 2}
-  InteractEvent:
-  - {fileID: 4060976082363728529}
---- !u!114 &4060976082363728529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4060976082363728535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb94000ea7307c4192cb7bc02dad782, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amountMin: 1
-  amountMax: 3
---- !u!114 &4060976082363728750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4060976082363728535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f310346feb7d741aa70a87ad3f6f65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  destroyOnDeath: 1
 --- !u!64 &4792140504284940181
 MeshCollider:
   m_ObjectHideFlags: 0

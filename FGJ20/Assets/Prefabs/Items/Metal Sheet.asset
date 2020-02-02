@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91140c06b6efd6d48b62486ca11dc14e, type: 3}
-  m_Name: Wood
+  m_Name: Metal Sheet
   m_EditorClassIdentifier: 
-  itemName: Wood
+  itemName: Metal Sheet
   itemImage: {fileID: 0}
-  itemDescription: Wood
+  itemDescription: Metal Sheet

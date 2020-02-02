@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject weapon;
     public GameObject axe;
 
+    public InventoryItem axeItem;
+    public InventoryItem weaponItem;
+
     public float walkSpeed;
     public float runSpeed;
     public float jumpForce;
@@ -40,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         infoText.text = "";
         body = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -47,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
     }
@@ -54,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     void LateUpdate()
     {
 
-        if(Input.GetKeyDown(KeyCode.Alpha1) && !weapon.activeInHierarchy)
+        if(Input.GetKeyDown(KeyCode.Alpha1) && !weapon.activeInHierarchy && GetComponent<PlayerInventory>().CheckItem(axeItem, 1))
         {
             if(!axe.activeInHierarchy)
             {
@@ -66,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha2) && !axe.activeInHierarchy)
+        if(Input.GetKeyDown(KeyCode.Alpha2) && !axe.activeInHierarchy && GetComponent<PlayerInventory>().CheckItem(weaponItem, 1))
         {
             if(!weapon.activeInHierarchy)
             {
@@ -87,35 +92,46 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
+            if(Cursor.visible)
+            {
+                Cursor.visible = false;
+            }
+
+            if(Cursor.lockState == CursorLockMode.None)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             animator.SetTrigger("punch");
 
             if(axe.activeInHierarchy && Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 6f))
             {
-                if(hit.collider.GetComponent<BaseEnemy>())
+                if(hit.collider.GetComponent<WorldItem>())
                 {
-                    hit.collider.GetComponent<HealthComponent>().TakeHealth(damage);
+                    if(!hit.collider.GetComponent<WorldItem>().interactWithE)
+                        hit.collider.GetComponent<WorldItem>().Interact(gameObject);
                 }
-                else if(hit.collider.GetComponent<WorldItem>())
+                else if(hit.collider.GetComponent<HealthComponent>())
                 {
-                    hit.collider.GetComponent<WorldItem>().Interact(gameObject);
+                    hit.collider.GetComponent<HealthComponent>().TakeHealth(damage, gameObject);
                 }
             }
             else if(weapon.activeInHierarchy && Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 150f))
             {
                 if(hit.collider.GetComponent<BaseEnemy>())
                 {
-                    hit.collider.GetComponent<HealthComponent>().TakeHealth(damage * 1.75f);
+                    hit.collider.GetComponent<HealthComponent>().TakeHealth(damage * 1.75f, gameObject);
                 }
             }
             else if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, 6f))
             {
-                if(hit.collider.GetComponent<BaseEnemy>())
+                if(hit.collider.GetComponent<WorldItem>())
                 {
-                    hit.collider.GetComponent<HealthComponent>().TakeHealth(damage / 2);
+                    if(!hit.collider.GetComponent<WorldItem>().interactWithE)
+                        hit.collider.GetComponent<WorldItem>().Interact(gameObject);
                 }
-                else if(hit.collider.GetComponent<WorldItem>())
+                else if(hit.collider.GetComponent<HealthComponent>())
                 {
-                    hit.collider.GetComponent<WorldItem>().Interact(gameObject);
+                    hit.collider.GetComponent<HealthComponent>().TakeHealth(damage / 2, gameObject);
                 }
             }
         }
@@ -126,9 +142,30 @@ public class PlayerMovement : MonoBehaviour
             {
                 infoText.text = hit.collider.GetComponent<InfoText>().infoText;
             }
+            else if (hit.collider.GetComponent<RepairMachineEvent>())
+            {
+                infoText.text = hit.collider.GetComponent<RepairMachineEvent>().InfoText;
+            }
             else
             {
                 infoText.text = "";
+            }
+
+            if(hit.collider.GetComponent<WorldItem>())
+            {
+                if(hit.collider.GetComponent<WorldItem>().interactWithE && Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.collider.GetComponent<WorldItem>().Interact(gameObject);
+
+                    if(hit.collider.tag == "Axe" && !weapon.activeInHierarchy)
+                    {
+                        animator.SetTrigger("takeaxe");
+                    }
+                    if(hit.collider.tag == "Weapon" && !axe.activeInHierarchy)
+                    {
+                        animator.SetTrigger("takeweapon");
+                    }
+                }
             }
         }
         else

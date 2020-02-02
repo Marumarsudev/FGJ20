@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 782d1fb61004bdc458a550a606af44a0, type: 3}
-  m_Name: Axe
+  m_Name: StockRecipe
   m_EditorClassIdentifier: 
   requiredItems:
-  - item: {fileID: 11400000, guid: 2254a8ce199c03847a6ef0bf0af687c3, type: 2}
-    amount: 1
   - item: {fileID: 11400000, guid: f3043ce8e7fdeef4fa4bc6e2521937ac, type: 2}
     amount: 1
-  result: {fileID: 11400000, guid: 2ab334ba1d0fac6488f8ea1c80ce1f5e, type: 2}
+  result: {fileID: 11400000, guid: 64c6b3b6f8cb4fa4fb8a59b7c79917d3, type: 2}
   amount: 1

@@ -11,6 +11,8 @@ public class HealthComponent : MonoBehaviour
 
     public bool destroyOnDeath;
 
+    public List<BaseEvent> deathEvents = new List<BaseEvent>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,7 @@ public class HealthComponent : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
     }
 
-    public void TakeHealth(float amount)
+    public void TakeHealth(float amount, GameObject interactor = null)
     {
         amount = Mathf.Abs(amount);
 
@@ -32,12 +34,16 @@ public class HealthComponent : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            Death();
+            Death(interactor);
         }
     }
 
-    private void Death()
+    private void Death(GameObject interactor = null)
     {
+        deathEvents.ForEach(e => {
+            e.CallEvent(interactor);
+        });
+
         if(destroyOnDeath)
         {
             Destroy(gameObject);

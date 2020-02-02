@@ -19,7 +19,6 @@ public class BaseEnemy : MonoBehaviour
 
     private float nextMoveTimer;
 
-    private bool moving;
     private bool seeingPlayer = false;
 
     private Terrain terrain;
@@ -57,7 +56,7 @@ public class BaseEnemy : MonoBehaviour
         if(nextMoveTimer > 0)
             nextMoveTimer -= Time.deltaTime;
 
-        if(nextMoveTimer <= 0 && !moving && !seeingPlayer)
+        if(nextMoveTimer <= 0 && !seeingPlayer)
         {
 
             travelpos = new Vector3(Random.Range(-travelRadius, travelRadius), 0, Random.Range(-travelRadius, travelRadius)) + startPos;
@@ -65,13 +64,7 @@ public class BaseEnemy : MonoBehaviour
             travelpos.y = terrain.SampleHeight(travelpos);
 
             meshAgent.SetDestination(travelpos);
-            moving = true;
-        }
-
-        if(Vector3.Distance(transform.position, travelpos) <= 1f && moving && !seeingPlayer)
-        {
-            nextMoveTimer = Random.Range(2f, 4f);
-            moving = false;
+            nextMoveTimer = Random.Range(5f, 10f);
         }
 
         if(seeingPlayer && nextMoveTimer <= 0)
@@ -90,7 +83,6 @@ public class BaseEnemy : MonoBehaviour
                 {
                     meshAgent.SetDestination(player.transform.position);
                     seeingPlayer = true;
-                    moving = false;
                 }
             }
             else if(seeingPlayer && Vector3.Distance(transform.position, player.transform.position) >= visionRange * 2f || hit.collider.tag != "Player")

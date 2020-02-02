@@ -24,27 +24,6 @@ public class ObjectSpawner : MonoBehaviour
     void Start()
     {
         layerMask = ~(1 << 9);
-        Debug.Log(layerMask);
-        for(int i = 0; i < enemycount; i++)
-        {
-            Vector3 spawnpos;
-            spawnpos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius)) + transform.position;
-
-            spawnpos.y = terrain.SampleHeight(spawnpos);
-
-            if(Physics.OverlapSphere(spawnpos, 3f, mask).Length  == 0)
-            {
-                GameObject temp;
-                temp = Instantiate(enemies[Random.Range(0, enemies.Count)], spawnpos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), parent);
-
-                enemies.Add(temp);
-            }
-            else
-            {
-                //i--;
-                Debug.Log("Oh no we hit something");
-            }
-        }
  
         for(int i = 0; i < environmentcount; i++)
         {
@@ -61,6 +40,37 @@ public class ObjectSpawner : MonoBehaviour
             temp.transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0) + temp.transform.rotation.eulerAngles);
 
             environment.Add(temp);
+            }
+            else
+            {
+                //i--;
+                Debug.Log("Oh no we hit something");
+            }
+        }
+    }
+
+    public void RemoveFromEnemies(GameObject obj)
+    {
+        enemies.Remove(obj);
+    }
+
+    void Update()
+    {
+        if (enemies.Count < enemycount)
+        {
+            Vector3 spawnpos;
+            spawnpos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius)) + transform.position;
+
+            spawnpos.y = terrain.SampleHeight(spawnpos);
+
+            if(Physics.OverlapSphere(spawnpos, 3f, mask).Length  == 0)
+            {
+                GameObject temp;
+                temp = Instantiate(enemies[Random.Range(0, enemies.Count)], spawnpos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
+
+                temp.GetComponent<RemoveEnemyFromListEvent>().spawner = this as ObjectSpawner;
+
+                enemies.Add(temp);
             }
             else
             {

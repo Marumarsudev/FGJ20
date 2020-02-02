@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MachineCraftEvent : BaseEvent
 {
     public CraftingRecipe recipe;
+
+    public InventoryItem repairItem;
+
+    public bool isRepaired;
 
     public float craftTime;
     private float craftTimer;
@@ -15,9 +20,18 @@ public class MachineCraftEvent : BaseEvent
 
     public Transform spawnPoint;
 
+    public TextMeshPro timnertext;
+
+    private Color origTextColor;
+
+    void Start()
+    {
+        origTextColor = timnertext.color;
+    }
+
     public override void CallEvent(GameObject interactor = null)
     {
-        if(interactor)
+        if(interactor && isRepaired)
         {
             if(interactor.GetComponent<PlayerInventory>())
             {
@@ -35,10 +49,27 @@ public class MachineCraftEvent : BaseEvent
 
     void Update()
     {
+        if(isRepaired)
+        {
+            timnertext.color = origTextColor;
+        }
+        else
+        {
+            timnertext.color = Color.red;
+        }
+
         if(crafted)
         {
             craftTimer -= Time.deltaTime;
-            Debug.Log(craftTimer);
+            timnertext.text = craftTimer.ToString("n2");
+        }
+        else if (isRepaired)
+        {
+            timnertext.text = "00.00";
+        }
+        else
+        {
+            timnertext.text = "BROKEN";
         }
 
         if(craftTimer <= 0 && crafted)

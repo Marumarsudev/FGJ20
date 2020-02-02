@@ -5,9 +5,9 @@ using UnityEngine;
 public class WorldItem : MonoBehaviour
 {
 
-    public InventoryItem inventoryItem;
-
     public List<BaseEvent> InteractEvent = new List<BaseEvent>();
+
+    public bool interactWithE;
 
     public void Interact(GameObject interactor = null)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AddItemToPlayerEvent : BaseEvent
 {
-    InventoryItem item;
+    public InventoryItem item;
 
     public int amountMin, amountMax;
 
@@ -12,8 +12,6 @@ public class AddItemToPlayerEvent : BaseEvent
 
     void Start()
     {
-        item = GetComponent<WorldItem>().inventoryItem;
-
         if(GetComponent<HealthComponent>())
         {
             hp = GetComponent<HealthComponent>();
